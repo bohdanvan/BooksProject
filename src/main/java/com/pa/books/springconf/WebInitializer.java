@@ -30,6 +30,11 @@ public class WebInitializer implements WebApplicationInitializer {
 
     private void configProfiles(ServletContext servletContext) {
         String activeProfiles = System.getProperty("profiles.active");
+
+        if (activeProfiles == null) {
+            activeProfiles = "prod";
+        }
+
         servletContext.setInitParameter("spring.profiles.active", activeProfiles);
     }
 }
