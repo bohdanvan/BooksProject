@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <!-- Console Appender -->
+    <appender name="ConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%r %d{ISO8601} %-5p %c - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Appender for debug and higher -->
+    <appender name="DebugFileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>${catalina.base}/logs/books-debug.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%r %d{ISO8601} %-5p %c - %m%n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- File Appender for info and higher -->
+    <appender name="InfoFileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>${catalina.base}/logs/books-info.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%r %d{ISO8601} %-5p %c - %m%n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- File Appender for warn and higher -->
+    <appender name="WarnFileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>${catalina.base}/logs/books-warn.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%r %d{ISO8601} %-5p %c - %m%n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- File Appender for error and higher -->
+    <appender name="ErrorFileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>${catalina.base}/logs/books-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%r %d{ISO8601} %-5p %c - %m%n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- File Appender for fatal -->
+    <appender name="FatalFileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>${catalina.base}/logs/books-fatal.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>FATAL</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%r %d{ISO8601} %-5p %c - %m%n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- Logger for Books -->
+    <logger name="com.pa.books" level="DEBUG" additivity="false">
+        <appender-ref ref="ConsoleAppender" />
+        <appender-ref ref="DebugFileAppender" />
+        <appender-ref ref="InfoFileAppender" />
+        <appender-ref ref="WarnFileAppender" />
+        <appender-ref ref="ErrorFileAppender" />
+        <appender-ref ref="FatalFileAppender" />
+    </logger>
+
+    <!-- Logger for Spring -->
+    <logger name="o.s" level="WARN" additivity="false">
+        <appender-ref ref="ConsoleAppender" />
+        <appender-ref ref="WarnFileAppender" />
+        <appender-ref ref="ErrorFileAppender" />
+        <appender-ref ref="FatalFileAppender" />
+    </logger>
+
+    <!-- Root Logger -->
+    <root level="INFO" additivity="false">
+        <appender-ref ref="ConsoleAppender" />
+    </root>
+
+</configuration>
