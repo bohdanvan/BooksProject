@@ -18,13 +18,14 @@ public class WebInitializer implements WebApplicationInitializer {
         configProfiles(servletContext);
 
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(DevAppContext.class);
+        context.register(AppContext.class);
 
         context.setServletContext(servletContext);
 
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
         servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
+        servlet.setInitParameter("throwExceptionIfNoHandlerFound", "true");
     }
 
     private void configProfiles(ServletContext servletContext) {
