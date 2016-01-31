@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
@@ -19,12 +20,12 @@ import javax.persistence.Persistence;
  * @author apo
  */
 @Configuration
-@ComponentScan(basePackages = "com.pa.books")
-public class AppConfig {
+@Profile("dev")
+public class DevAppContext {
 
     @Bean
     public EntityManager entityManager() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("BooksJPA");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DevBooksJPA");
         return emf.createEntityManager();
     }
 

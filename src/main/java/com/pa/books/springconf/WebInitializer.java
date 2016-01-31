@@ -15,13 +15,20 @@ public class WebInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+        configProfiles(servletContext);
+
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(AppConfig.class);
+        context.register(DevAppContext.class);
 
         context.setServletContext(servletContext);
 
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
         servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
+    }
+
+    private void configProfiles(ServletContext servletContext) {
+        String activeProfiles = System.getProperty("profiles.active");
+        servletContext.setInitParameter("spring.profiles.active", activeProfiles);
     }
 }

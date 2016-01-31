@@ -13,29 +13,27 @@
 </head>
 <body>
 <h2 style="text-align: center">Add New Record</h2>
-<div>
-<form:form action="/web/book/save" modelAttribute="book" method="post">
+<form:form  action="/web/book/save" modelAttribute="book" method="post">
   <label for="isbnInput">ISBN:</label>
   <form:input path="isbn" id="isbnInput"></form:input>
   <form:errors path="isbn" cssClass="error"></form:errors>
   <c:if test="${not empty bookExistsError}">
     Book with same ISBN already exists
   </c:if>
-  <br />
+  <br/>
 
   <label for="authorInput">Author:</label>
-  <form:input path="author" id="authorInput"></form:input>
+  <form:input path="author" id="authorInput" ></form:input>
   <form:errors path="author" cssClass="error"></form:errors>
-  <br />
+  <br/>
 
   <label for="titleInput">Title:</label>
   <form:input path="title" id="titleInput"></form:input>
   <form:errors path="title" cssClass="error"></form:errors>
-  <br />
+  <br/>
 
   <input type="submit" value="Submit"/>
 </form:form>
-</div>
 
 </body>
 </html>
